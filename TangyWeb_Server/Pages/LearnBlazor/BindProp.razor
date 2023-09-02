@@ -4,6 +4,11 @@
 Name: @product.Name<br />
 Active: @product.IsActive<br />
 Price : @product.Price<br />
+This Product is : @(product.IsActive? "Active":"InActive") <br /><br />
+
+@*add toggling checkbox functionality*@
+Active: <input type="checkbox" @bind="product.IsActive" />
+
 @*one-way data binding to two-way data binding*@
 Price : <input type="number" @bind="@product.Price" @bind:event="oninput" />
 
