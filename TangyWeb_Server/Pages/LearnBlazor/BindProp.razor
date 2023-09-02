@@ -1,0 +1,23 @@
+﻿@page "/learnBlazor/bindProp"
+
+<h3>Product</h3>
+Name: @product.Name<br />
+Active: @product.IsActive<br />
+Price : @product.Price<br />
+@*one-way data binding to two-way data binding*@
+Price : <input type="number" @bind="@product.Price" @bind:event="oninput" />
+
+ 
+
+
+@code {
+    Tangy_Models.LearnBlazorModels.Demo_Products product = new()
+    {
+        Id = 1,
+        Name = "Rose Candle",
+        IsActive = true,
+        Price= 10.99
+    };
+
+}
+
