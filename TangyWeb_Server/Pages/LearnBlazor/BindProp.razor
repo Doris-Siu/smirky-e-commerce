@@ -1,51 +1,65 @@
 ﻿@page "/learnBlazor/bindProp"
 
-<h3>Product</h3>
-Name: @product.Name<br />
-Active: @product.IsActive<br />
-Price : @product.Price<br />
-This Product is : @(product.IsActive? "Active":"InActive") <br />
-Product Selected: @_selectedProp <br />
-@if (!String.IsNullOrWhiteSpace(_selectedProp))
-{
-        <p>Propety Value : @product.ProductProperties.FirstOrDefault(p => p.Key==_selectedProp).Value</p>
+<h2 class="text-success">Individual Product</h2>
+<div class="row">
+    <div class="col-6 border p-3">
+        <h3 class="text-primary">Product Playground</h3><hr />
 
-}
 
-@*add toggling checkbox functionality*@
-Active: <input type="checkbox" @bind="product.IsActive" /><br />
+        @*add toggling checkbox functionality*@
+        <div>
+            Active: <input type="checkbox" @bind="product.IsActive" /><br />
+        </div>
+        @*one-way data binding to two-way data binding*@
+        <div>
+            Price : <input type="number" @bind="@product.Price" @bind:event="oninput" /><br />
+        </div>
+        @*dropdown binding*@
+        <div>
+            Product Properties:
+            <select @bind="_selectedProp">
+                @foreach (var prop in product.ProductProperties)
+                {
+                    <option value="@prop.Key">@prop.Key</option>
 
-@*one-way data binding to two-way data binding*@
-Price : <input type="number" @bind="@product.Price" @bind:event="oninput" /><br />
-
-@*dropdown binding*@
-Product Properties:
-<select @bind="_selectedProp">
-    @foreach (var prop in product.ProductProperties)
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col-6 border p-2">
+        <h3 class="text-primary">Product Summary</h3><hr />
+        Name: @product.Name<br />
+        Active: @product.IsActive<br />
+        Price : @product.Price<br />
+        This Product is : @(product.IsActive? "Active":"InActive") <br />
+        Product Selected: @_selectedProp <br />
+        @if (!String.IsNullOrWhiteSpace(_selectedProp))
         {
-            <option value="@prop.Key">@prop.Key</option>
+            <p>Propety Value : @product.ProductProperties.FirstOrDefault(p => p.Key == _selectedProp).Value</p>
 
         }
-</select>
-
- 
+    </div>
 
 
-@code {
-    private string _selectedProp = "";
-    Tangy_Models.LearnBlazorModels.Demo_Products product = new()
-    {
-        Id = 1,
-        Name = "Rose Candle",
-        IsActive = true,
-        Price= 10.99,
-        ProductProperties = new List<Demo_ProductProp>()
-            {
+</div>
+
+
+
+    @code {
+        private string _selectedProp = "";
+        Tangy_Models.LearnBlazorModels.Demo_Products product = new()
+        {
+            Id = 1,
+            Name = "Rose Candle",
+            IsActive = true,
+            Price = 10.99,
+            ProductProperties = new List<Demo_ProductProp>()
+        {
                 new Demo_ProductProp { Id = 1, Key = "Color", Value="Black"},
                 new Demo_ProductProp { Id = 2, Key = "Flavor", Value = "Rose Jasmine" },
                 new Demo_ProductProp { Id = 3, Key = "Size", Value = "20oz"},
             }
-    };
+        };
 
-}
+    }
 
