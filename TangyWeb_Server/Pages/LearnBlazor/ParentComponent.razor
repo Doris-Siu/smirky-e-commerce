@@ -3,13 +3,14 @@
 <h3>Parent Child Relation</h3>
 
 <_ChildComponent OnButtonClick="ShowMessage" Title="This title is passed as parameter from Parent Component">
-    Render Fragment From Parent!
+    <ChildContent>Render Fragment From Parent!</ChildContent>
+    <DangerChildContent>Danger Content from Render Fragment</DangerChildContent>
 </_ChildComponent>
 
 <p><b>@messageText</b></p>
 
-<_ChildComponent Title="This is second child component.">
-</_ChildComponent>
+@*<_ChildComponent Title="This is second child component.">
+    </_ChildComponent>*@
 
 
 @code {
@@ -18,7 +19,7 @@
     private void ShowMessage()
     {
         messageText = "Tangy button clicked form Child Component.";
-}
+    }
 
 }
 
