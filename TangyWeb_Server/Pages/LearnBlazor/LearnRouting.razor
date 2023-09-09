@@ -11,12 +11,15 @@
 <h4>Parameter1: @Parameter1</h4>
 <h4>Parameter2: @Parameter2</h4>
 
-<a href="learnRouting?Param1=Tangy&Param2=Blazor" class="btn btn-primary">Navigate to query parameter</a>
+@*<a href="learnRouting?Param1=Tangy&Param2=Blazor" class="btn btn-primary">Navigate to query parameter</a>
+*@
+
+<button @onclick="NavigateToQueryParam" class="btn btn-primary">Navigate to query parameter</button>
 
 <button class="btn btn-success" @onclick="LoadParameters">Load Parameters</button>
 <br />
 <h3>Query String Parameters: </h3>
-<h4>Para1: @Param1</h4>
+<h4>Param1: @Param1</h4>
 <h4>Param2: @Param2</h4>
 
 @code {
@@ -37,6 +40,10 @@
         Param2 = queryParam["Param2"];
 
 
+    }
+    public void NavigateToQueryParam()
+    {
+        _NavigationManager.NavigateTo("learnRouting?Param1=Tangy&Param2=Blazor");
     }
 
 }
