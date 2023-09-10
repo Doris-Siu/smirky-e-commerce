@@ -4,7 +4,13 @@
 <h3>Blazor Js</h3>
 
 <div class="row">
-    <div class="btn btn-secondary" @onclick="TestConfirmBox">Test Confirm Button</div>
+    <button class="btn btn-secondary" @onclick="TestConfirmBox">Test Confirm Button</button>
+</div>
+
+<div class="row">
+    <button class="btn btn-success" @onclick="ToastrSuccess">Toastr Success</button>
+    <button class="btn btn-danger" @onclick="ToastrFailure">Toastr Failure</button>
+
 </div>
 
 <div class="row">
@@ -27,6 +33,16 @@
     private async Task TestConfirmBox()
     {
         ConfirmResult = await _JsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
+    }
+
+    private async Task ToastrSuccess()
+    {
+        await _JsRuntime.InvokeVoidAsync("ShowToastr", "success", "Success");
+    }
+
+    private async Task ToastrFailure()
+    {
+        await _JsRuntime.InvokeVoidAsync("ShowToastr", "error", "Error");
     }
 
 }
