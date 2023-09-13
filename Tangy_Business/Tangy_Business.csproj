@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Repository\" />
+    <None Remove="Repository\IRepository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repository\" />
+    <Folder Include="Repository\IRepository\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tangy_Models\Tangy_Models.csproj" />
+  </ItemGroup>
 </Project>
