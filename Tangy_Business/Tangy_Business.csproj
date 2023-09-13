@@ -9,13 +9,18 @@
   <ItemGroup>
     <None Remove="Repository\" />
     <None Remove="Repository\IRepository\" />
+    <None Remove="Mapper\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repository\" />
     <Folder Include="Repository\IRepository\" />
+    <Folder Include="Mapper\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangy_Models\Tangy_Models.csproj" />
     <ProjectReference Include="..\Tangy_DataAccess\Tangy_DataAccess.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
   </ItemGroup>
 </Project>
