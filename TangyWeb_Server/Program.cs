@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Tangy_Business.Repository;
+using Tangy_Business.Repository.IRepository;
 using Tangy_DataAccess.Data;
 using TangyWeb_Server.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options=>
     options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDataBase"))
 ); //not sure how to add
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 

@@ -24,6 +24,9 @@
     <ProjectReference Include="..\Tangy_DataAccess\Tangy_DataAccess.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Tangy_Business\Tangy_Business.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Blazor.Bootstrap" Version="1.10.1" />
