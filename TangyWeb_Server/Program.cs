@@ -5,13 +5,13 @@ using Tangy_DataAccess.Data;
 using TangyWeb_Server.Data;
 
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-builder.Services.AddDbContext<ApplicationDbContext>(options=>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDataBase"))
 ); //not sure how to add
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
