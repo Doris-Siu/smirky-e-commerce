@@ -31,7 +31,10 @@ namespace Tangy_Business.Repository
 
             // use mapper
             var obj = _mapper.Map<CategoryDTO, Category>(objDTO);
-            obj.CreatedDate = DateTime.Now;
+
+            obj.CreatedDate = DateTime.UtcNow;
+
+
 
             _db.Categories.Add(obj);
             _db.SaveChanges();
