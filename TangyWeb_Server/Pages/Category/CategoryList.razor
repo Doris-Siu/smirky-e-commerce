@@ -74,16 +74,17 @@
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
-        { LoadCategories(); }
-
+        {
+            await LoadCategories();
+        }
     }
 
-    private void LoadCategories()
+    private async Task LoadCategories()
     {
         IsLoading = true;
         // manually change the UI - invoke re-rendering
         StateHasChanged();
-        Categories = _categoryRepository.GetAll();
+        Categories = await _categoryRepository.GetAll();
         IsLoading = false;
         // manually change the UI - invoke re-rendering
         StateHasChanged();
@@ -104,9 +105,9 @@
             IsLoading = true;
             //delete
             //await Task.Delay(5000);
-            _categoryRepository.Delete(DeleteCategoryId);
-            LoadCategories();
-            _jsRuntime.InvokeVoidAsync("HideDeleteConfirmationModal");
+            await _categoryRepository.Delete(DeleteCategoryId);
+            await LoadCategories();
+            await _jsRuntime.InvokeVoidAsync("HideDeleteConfirmationModal");
         }
         IsLoading = false;
     }
