@@ -58,19 +58,35 @@
 @code {
     public IEnumerable<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
 
-    public bool IsLoading { get; set; } = true;
+    public bool IsLoading { get; set; }
 
     private int DeleteCategoryId { get; set; } = 0;
 
-    protected override async Task OnInitializedAsync()
+
+    // OnInitializedAsync - multithreading will cause potential db issue
+    // better use OnAfterRenderAsync lifecycle to load categories & statehaschanged
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    await Task.Run(LoadCategories);
+    //}
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        await Task.Run(LoadCategories);
+        if (firstRender)
+        { LoadCategories(); }
+
     }
 
     private void LoadCategories()
     {
+        IsLoading = true;
+        // manually change the UI - invoke re-rendering
+        StateHasChanged();
         Categories = _categoryRepository.GetAll();
         IsLoading = false;
+        // manually change the UI - invoke re-rendering
+        StateHasChanged();
 
     }
 
