@@ -3,7 +3,7 @@
 @inject ICategoryRepository _categoryRepository
 @inject IJSRuntime _jsRuntime
 
-<_DeleteConfirmation OnConfirmationChanged="ConfirmDelete_Click" ></_DeleteConfirmation>
+<_DeleteConfirmation IsParentCompProcessing="IsLoading" OnConfirmationChanged="ConfirmDelete_Click"></_DeleteConfirmation>
 
 
 <div class="row mt-4">
@@ -83,13 +83,16 @@
 
     public async Task ConfirmDelete_Click(bool isConfirmed)
     {
-        if (isConfirmed && DeleteCategoryId !=0)
-    {
+        if (isConfirmed && DeleteCategoryId != 0)
+        {
+            IsLoading = true;
             //delete
+            //await Task.Delay(5000);
             _categoryRepository.Delete(DeleteCategoryId);
             LoadCategories();
             _jsRuntime.InvokeVoidAsync("HideDeleteConfirmationModal");
-    }
+        }
+        IsLoading = false;
     }
 }
 
