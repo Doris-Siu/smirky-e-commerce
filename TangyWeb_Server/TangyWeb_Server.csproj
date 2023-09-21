@@ -11,6 +11,7 @@
     <None Remove="Pages\LearnBlazor\LearnBlazorComponents\" />
     <None Remove="Helper\" />
     <None Remove="Pages\Category\" />
+    <None Remove="Pages\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\LearnBlazor\" />
@@ -18,6 +19,7 @@
     <Folder Include="wwwroot\js\" />
     <Folder Include="Helper\" />
     <Folder Include="Pages\Category\" />
+    <Folder Include="Pages\Product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangy_Models\Tangy_Models.csproj">
