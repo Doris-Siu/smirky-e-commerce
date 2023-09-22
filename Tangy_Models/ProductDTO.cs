@@ -9,7 +9,7 @@ namespace Tangy_Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public string Desciption { get; set; }
+        public string Description { get; set; }
         public bool ShopFavorites { get; set; }
         public bool CustomerFavorites { get; set; }
         public string Color { get; set; }
@@ -21,5 +21,6 @@ namespace Tangy_Models
         public CategoryDTO Category { get; set; }
     }
 }
-}
+
+
 
