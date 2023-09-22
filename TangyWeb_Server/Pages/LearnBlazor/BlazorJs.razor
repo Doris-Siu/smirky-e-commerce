@@ -43,12 +43,12 @@
 
     private async Task ToastrSuccess()
     {
-        await _JsRuntime.ToatrSuccess("Operation Successful");
+        await _JsRuntime.ToastrErrorSuccess("Operation Successful");
     }
 
     private async Task ToastrFailure()
     {
-        await _JsRuntime.ToatrError("Operation Failed");
+        await _JsRuntime.ToastrError("Operation Failed");
     }
 
     private async Task SweetAlertSuccess()

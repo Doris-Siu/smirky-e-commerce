@@ -5,6 +5,9 @@
 
 @inject NavigationManager _navigationManager
 
+@inject IFileUpload _fileUpload
+@inject IJSRuntime _jsRuntime
+
 <div class="row my-2">
     <h3 class="card-title text-primary mb-3 ml-3">@Title Product</h3>
 
@@ -23,18 +26,18 @@
                 <div class="form-group">
                     <label>Name</label>
                     <InputText @bind-Value="Product.Name" class="form-control"></InputText>
-                    <ValidationMessage For="()=>Product.Name"></ValidationMessage>
+                    <ValidationMessage For="() => Product.Name"></ValidationMessage>
                 </div>
                 <div class="form-group">
                     <label>Color</label>
                     <InputText @bind-Value="Product.Color" class="form-control"></InputText>
-                    <ValidationMessage For="()=>Product.Color"></ValidationMessage>
+                    <ValidationMessage For="() => Product.Color"></ValidationMessage>
                 </div>
-               
+
                 <div class="form-group">
                     <label>Description</label>
                     <InputTextArea @bind-Value="Product.Description" class="form-control"></InputTextArea>
-                    <ValidationMessage For="()=>Product.Description"></ValidationMessage>
+                    <ValidationMessage For="() => Product.Description"></ValidationMessage>
                 </div>
 
                 <div class="row pt-3">
@@ -60,7 +63,7 @@
                             }
 
                         </InputSelect>
-                        <ValidationMessage For="()=>Product.CategoryId"></ValidationMessage>
+                        <ValidationMessage For="() => Product.CategoryId"></ValidationMessage>
                     </div>
                 </div>
 
@@ -68,6 +71,9 @@
                 <div class="form-group py-2">
                     <button class="btn btn-primary">@Title</button>
                     <NavLink href="product" class="btn btn-secondary">Back to Index</NavLink>
+                </div>
+                <div class="form-group col-6">
+                    <InputFile OnChange="HandleImageUpload"></InputFile>
                 </div>
             </EditForm>
         }
@@ -125,4 +131,36 @@
 
 
     }
+
+    private async Task HandleImageUpload(InputFileChangeEventArgs e)
+    {
+        IsLoading = true;
+        try
+        {
+            if (e.GetMultipleFiles().Count > 0)
+            {
+                foreach (var file in e.GetMultipleFiles())
+                {
+                    System.IO.FileInfo fileInfo = new System.IO.FileInfo(file.Name);
+                    if (fileInfo.Extension.ToLower() == ".jpg" ||
+                      fileInfo.Extension.ToLower() == ".png" ||
+                      fileInfo.Extension.ToLower() == ".jpeg")
+                    {
+                        Product.ImageUrl = await _fileUpload.UploadFile(file);
+                    }
+                    else
+                    {
+                        await _jsRuntime.ToastrError("Please select .jpg/.jpeg/.png file only");
+                        return;
+                    }
+                }
+            }
+            IsLoading = false;
+        }
+        catch (Exception ex)
+        {
+            await _jsRuntime.ToastrError(ex.Message);
+        }
+    }
+
 }
