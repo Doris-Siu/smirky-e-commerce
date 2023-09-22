@@ -12,6 +12,8 @@
     <None Remove="Helper\" />
     <None Remove="Pages\Category\" />
     <None Remove="Pages\Product\" />
+    <None Remove="Service\" />
+    <None Remove="Service\IService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\LearnBlazor\" />
@@ -20,6 +22,9 @@
     <Folder Include="Helper\" />
     <Folder Include="Pages\Category\" />
     <Folder Include="Pages\Product\" />
+    <Folder Include="Service\" />
+    <Folder Include="Service\IService\" />
+    <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangy_Models\Tangy_Models.csproj">
@@ -43,5 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\js\" />
+    <Content Remove="wwwroot\images\product\" />
   </ItemGroup>
 </Project>
