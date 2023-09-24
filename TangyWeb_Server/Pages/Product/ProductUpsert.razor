@@ -65,6 +65,9 @@
                         </InputSelect>
                         <ValidationMessage For="() => Product.CategoryId"></ValidationMessage>
                     </div>
+                    <div class="form-group pt-4 col-6">
+                        <InputFile OnChange="HandleImageUpload"></InputFile>
+                    </div>
                 </div>
 
 
@@ -72,14 +75,13 @@
                     <button class="btn btn-primary">@Title</button>
                     <NavLink href="product" class="btn btn-secondary">Back to Index</NavLink>
                 </div>
-                <div class="form-group col-6">
-                    <InputFile OnChange="HandleImageUpload"></InputFile>
-                </div>
+                
             </EditForm>
         }
-        <div class="col-md-2">
-            <img src="@Product.ImageUrl" class="w-100">
-        </div>
+
+    </div>
+    <div class="col-md-2">
+        <img src="@Product.ImageUrl" class="w-100">
     </div>
 </div>
 
@@ -96,6 +98,8 @@
     private IEnumerable<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
     private string Title { get; set; } = "Create";
     public bool IsLoading { get; set; }
+    public string OldImageUrl { get; set; }
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -116,6 +120,7 @@
             //update
             Title = "Update";
             Product = await _productRepository.Get(Id);
+            OldImageUrl = Product.ImageUrl;
         }
 
         IsLoading = false;
@@ -127,11 +132,20 @@
         {
             //create
             await _productRepository.Create(Product);
+            await _jsRuntime.ToastrSuccess("Product created successfully.");
         }
         else
         {
             //update
+            if (OldImageUrl != Product.ImageUrl)
+            {
+                _fileUpload.DeleteFile(OldImageUrl);
+
+            }
             await _productRepository.Update(Product);
+
+            await _jsRuntime.ToastrSuccess("Product updated successfully.");
+
         }
         _navigationManager.NavigateTo("product");
 

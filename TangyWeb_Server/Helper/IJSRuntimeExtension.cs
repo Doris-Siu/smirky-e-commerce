@@ -5,7 +5,7 @@ namespace TangyWeb_Server.Helper
 {
     public static class IJSRuntimeExtension
     {
-        public static async ValueTask ToastrErrorSuccess(this IJSRuntime jsRuntime, string message)
+        public static async ValueTask ToastrSuccess(this IJSRuntime jsRuntime, string message)
         {
             await jsRuntime.InvokeVoidAsync("ShowToastr", "success", message);
 
