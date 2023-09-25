@@ -9,7 +9,7 @@ namespace Tangy_Business.Repository.IRepository
         public Task<ProductPriceDTO> Update(ProductPriceDTO objDTO);
         public Task<int> Delete(int id);
         public Task<ProductPriceDTO> Get(int id);
-        public Task<IEnumerable<ProductPriceDTO>> GetAll();
+        public Task<IEnumerable<ProductPriceDTO>> GetAll(int? id = null);
     }
 }
 
