@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangyWeb_API", "TangyWeb_API\TangyWeb_API.csproj", "{FF51A6EA-CC7C-40DC-9D20-18660324D7ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +52,10 @@ Global
 		{BAE8E62F-A395-42B7-B8BF-E63247662149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAE8E62F-A395-42B7-B8BF-E63247662149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAE8E62F-A395-42B7-B8BF-E63247662149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF51A6EA-CC7C-40DC-9D20-18660324D7ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF51A6EA-CC7C-40DC-9D20-18660324D7ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF51A6EA-CC7C-40DC-9D20-18660324D7ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF51A6EA-CC7C-40DC-9D20-18660324D7ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
