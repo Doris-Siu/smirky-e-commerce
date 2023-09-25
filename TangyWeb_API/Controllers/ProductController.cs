@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tangy_Business.Repository.IRepository;
+using Tangy_Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,35 +22,37 @@ namespace TangyWeb_API.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(await _productRepository.GetAll());
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{productId}")]
+        public async Task<IActionResult> Get(int? productId)
         {
-            return "value";
+            if (productId == null || productId == 0)
+            {
+                return BadRequest(new ErrorModelDTO()
+                {
+                    ErrorMessage = "Invalid Id",
+                    StatusCode = StatusCodes.Status400BadRequest
+                });
+            }
+
+            var product = _productRepository.Get(productId.Value);
+            if (product == null)
+            {
+                return BadRequest(new ErrorModelDTO()
+                {
+                    ErrorMessage = "Invalid Id",
+                    StatusCode = StatusCodes.Status404NotFound
+                });
+            }
+
+            return Ok(product);
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
 
