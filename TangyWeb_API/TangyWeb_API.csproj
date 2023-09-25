@@ -18,5 +18,8 @@
     <ProjectReference Include="..\Tangy_DataAccess\Tangy_DataAccess.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\Tangy_Business\Tangy_Business.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>
