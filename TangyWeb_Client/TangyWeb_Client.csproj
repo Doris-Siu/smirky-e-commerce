@@ -14,14 +14,23 @@
 
   <ItemGroup>
     <None Remove="Helper\" />
+    <None Remove="Service\" />
+    <None Remove="Service\IService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="wwwroot\images\" />
+    <Folder Include="Service\" />
+    <Folder Include="Service\IService\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\js\" />
     <Content Remove="wwwroot\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tangy_Models\Tangy_Models.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>
