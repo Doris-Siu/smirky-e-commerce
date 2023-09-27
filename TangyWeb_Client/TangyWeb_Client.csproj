@@ -19,6 +19,7 @@
     <None Remove="Service\" />
     <None Remove="Service\IService\" />
     <None Remove="ViewModels\" />
+    <None Remove="Pages\CartDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />
@@ -27,6 +28,7 @@
     <Folder Include="Service\" />
     <Folder Include="Service\IService\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Pages\CartDetails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\js\" />
