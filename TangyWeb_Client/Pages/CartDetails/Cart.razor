@@ -108,15 +108,21 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+
         IsProcessing = true;
-        ShoppingCart = await _localStorage.GetItemAsync<List<ShoppingCartVM>>(SD.ShoppingCart);
+        var localStorageShoppingCart = await _localStorage.GetItemAsync<List<ShoppingCartVM>>(SD.ShoppingCart);
+        if (localStorageShoppingCart != null)
+            ShoppingCart = localStorageShoppingCart;
         Products = await _productService.GetAll();
+
+
         foreach (var cart in ShoppingCart)
         {
             cart.Product = Products.FirstOrDefault(u => u.Id == cart.ProductId);
             cart.ProductPrice = cart.Product.ProductPrices.FirstOrDefault(u => u.Id == cart.ProductPriceId);
             OrderTotal += (cart.ProductPrice.Price * cart.Count);
         }
+
         IsProcessing = false;
     }
 }
