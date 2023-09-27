@@ -17,6 +17,7 @@
     <None Remove="Helper\" />
     <None Remove="Service\" />
     <None Remove="Service\IService\" />
+    <None Remove="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helper\" />
@@ -24,6 +25,7 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="Service\" />
     <Folder Include="Service\IService\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="wwwroot\js\" />
