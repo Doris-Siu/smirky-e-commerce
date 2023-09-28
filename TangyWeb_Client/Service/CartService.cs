@@ -14,6 +14,7 @@ namespace TangyWeb_Client.Serivce
             _localStorage = localStorageService;
         }
 
+        public event Action OnChange;
 
         public async Task IncrementCart(ShoppingCartVM cartToAdd)
         {
@@ -50,6 +51,9 @@ namespace TangyWeb_Client.Serivce
             // update the local storage at the end
             await _localStorage.SetItemAsync(SD.ShoppingCart, cart);
 
+            // invoke & notify the binded component to
+            OnChange.Invoke();
+
         }
 
 
@@ -62,7 +66,7 @@ namespace TangyWeb_Client.Serivce
             {
                 if (cart[i].ProductId == cartToDecrement.ProductId && cart[i].ProductPriceId == cartToDecrement.ProductPriceId)
                 {
-                    if (cart[i].Count == 1 || cart[i].Count == 0)
+                    if (cart[i].Count == 1 || cartToDecrement.Count == 0)
                     {
                         cart.Remove(cart[i]);
                     }
@@ -74,6 +78,7 @@ namespace TangyWeb_Client.Serivce
             }
 
             await _localStorage.SetItemAsync(SD.ShoppingCart, cart);
+            OnChange.Invoke();
 
         }
     }
