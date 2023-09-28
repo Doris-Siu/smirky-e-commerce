@@ -1,6 +1,7 @@
 ﻿@page "/cart"
 @inject ILocalStorageService _localStorage
 @inject IProductService _productService
+@inject ICartService _cartService
 
 
 @if (IsProcessing)
@@ -57,15 +58,15 @@ else
                                     <h6><strong>@item.ProductPrice.Price.ToString("c") <span class="text-muted">x</span> @item.Count </strong></h6>
                                 </div>
                                 <div class="col-6 col-sm-4 col-lg-6">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button @onclick="()=>Increment(item.ProductId,item.ProductPriceId,1)" type="submit" class="btn btn-primary">
                                         <i class="bi bi-plus-square"></i>
                                     </button>
-                                    <button type="submit" class="btn btn-warning">
+                                    <button @onclick="()=>Decrement(item.ProductId,item.ProductPriceId,1)" type="submit" class="btn btn-warning">
                                         <i class="bi bi-dash-square"></i>
                                     </button>
                                 </div>
                                 <div class="col-2 col-sm-4 col-lg-2 text-right">
-                                    <button type="submit" class="btn btn-outline-danger">
+                                    <button @onclick="()=>Decrement(item.ProductId,item.ProductPriceId,0)" type="submit" class="btn btn-outline-danger">
                                         <i class="bi bi-trash-fill"></i>
                                     </button>
                                 </div>
@@ -110,10 +111,20 @@ else
     {
 
         IsProcessing = true;
+        Products = await _productService.GetAll();
+        await LoadCart();
+
+
+
+        IsProcessing = false;
+    }
+
+    private async Task LoadCart()
+    {
+        OrderTotal = 0;
         var localStorageShoppingCart = await _localStorage.GetItemAsync<List<ShoppingCartVM>>(SD.ShoppingCart);
         if (localStorageShoppingCart != null)
             ShoppingCart = localStorageShoppingCart;
-        Products = await _productService.GetAll();
 
 
         foreach (var cart in ShoppingCart)
@@ -122,7 +133,33 @@ else
             cart.ProductPrice = cart.Product.ProductPrices.FirstOrDefault(u => u.Id == cart.ProductPriceId);
             OrderTotal += (cart.ProductPrice.Price * cart.Count);
         }
+    }
 
+    private async Task Increment(int ProductId, int ProductPriceId, int Count)
+    {
+        IsProcessing = true;
+        await _cartService.IncrementCart(new()
+        {
+            Count = Count,
+            ProductId = ProductId,
+            ProductPriceId = ProductPriceId
+        });
+
+        await LoadCart();
+        IsProcessing = false;
+    }
+
+    private async Task Decrement(int ProductId, int ProductPriceId, int Count)
+    {
+        IsProcessing = true;
+        await _cartService.DecrementCart(new()
+        {
+            Count = Count,
+            ProductId = ProductId,
+            ProductPriceId = ProductPriceId
+        });
+
+        await LoadCart();
         IsProcessing = false;
     }
 }
