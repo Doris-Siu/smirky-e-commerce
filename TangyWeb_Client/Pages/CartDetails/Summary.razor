@@ -1,8 +1,17 @@
 ﻿@page "/summary"
+@inject IJSRuntime _jsRuntime
+@inject ILocalStorageService _localStorage
+@inject IProductService _productService
 
-
- <div class="mt-4 mx-4 px-md-5 mx-md-5 p-1">
-
+@if (IsProcessing)
+{
+    <div style="position:fixed;top:50%;left:50%;margin-top:-50px;margin-left:-100px;">
+        <img src="images/ajax-loader.gif" />
+    </div>
+}
+else
+{
+    <div class="mt-4 mx-4 px-md-5 mx-md-5 p-1">
         <div class="row p-2 my-3">
             <div class="col-12 col-lg-7 p-4">
                 <div class="row px-2 text-success ">
@@ -11,9 +20,7 @@
                         <a href="" class="btn btn-secondary btn-block">Back to cart</a>
                     </div>
                 </div>
-
                 <div class="row border p-1 m-1">
-
                     <div class="col-3 col-md-2 ">
                         <img src="" width="100%">
                     </div>
@@ -21,7 +28,6 @@
                         <span class="">Product : ProductName </span><br />
                         <span class="pt-1">Size : Size</span><br />
                         <span class="pt-1">Count : Count</span><br />
-
                     </div>
                     <div class="col-4 col-md-5 " style="text-align:right;">
                         <h4 class="text-warning font-weight-bold pt-2">
@@ -38,11 +44,9 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-12 col-lg-5 p-4 ml-4 ml-md-0 mt-4 mt-md-0 border">
                 <form method="post">
                     <div class="row px-2 text-success border-bottom"><div class="col-7 py-1"><p style="font-size:x-large;margin:0px;">Enter Details</p></div></div>
-
                     <div class="form-group pt-2">
                         <label class="text-warning">Name</label>
                         <input type="text" class="form-control" />
@@ -71,8 +75,6 @@
                         <label class="text-warning">Postal Code</label>
                         <input type="text" class="form-control" />
                     </div>
-
-
                     <div class="form-group pt-2">
                         <button type="submit" class="btn btn-success form-control">Checkout Now</button>
                     </div>
@@ -80,8 +82,48 @@
             </div>
         </div>
     </div>
-
-@code {
-
 }
 
+
+
+@code {
+    public bool IsProcessing { get; set; } = false;
+    private OrderDTO Order { get; set; } = null;
+    private IEnumerable<ProductDTO> Products { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        IsProcessing = true;
+        List<ShoppingCartVM> cart = await _localStorage.GetItemAsync<List<ShoppingCartVM>>(SD.ShoppingCart);
+        Products = await _productService.GetAll();
+        Order = new()
+        {
+            OrderHeader = new()
+            {
+                OrderTotal = 0,
+                Status = SD.Status_Pending
+            },
+            OrderDetails = new List<OrderDetailDTO>()
+        };
+
+        foreach (var item in cart)
+        {
+            ProductDTO product = Products.FirstOrDefault(u => u.Id == item.ProductId);
+            ProductPriceDTO productPrice = product.ProductPrices.FirstOrDefault(u => u.Id == item.ProductPriceId);
+
+            OrderDetailDTO orderDetailDTO = new()
+            {
+                ProductId = item.ProductId,
+                Size = productPrice.Size,
+                Count = item.Count,
+                Price = productPrice.Price,
+                ProductName = product.Name,
+                Product = product
+            };
+            Order.OrderDetails.Add(orderDetailDTO);
+            Order.OrderHeader.OrderTotal += (cart.Count * productPrice.Price);
+        }
+
+        IsProcessing = false;
+    }
+}
