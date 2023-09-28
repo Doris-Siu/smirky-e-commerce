@@ -1,10 +1,10 @@
 ﻿using System;
 namespace Tangy_Common
 {
-	
-        public static class SD
-        {
-            public const string ShoppingCart = "ShoppingCart";
+
+    public static class SD
+    {
+        public const string ShoppingCart = "ShoppingCart";
 
         public const string Status_Pending = "Pending";
         public const string Status_Confirmed = "Confirmed";
@@ -13,6 +13,6 @@ namespace Tangy_Common
         public const string Status_Cancelled = "Cancelled";
     }
 }
-    
-}
+
+
 

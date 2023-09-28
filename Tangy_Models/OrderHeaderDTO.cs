@@ -4,8 +4,8 @@ using System.Xml.Linq;
 
 namespace Tangy_Models
 {
-	public class OrderHeaderDTO
-	{
+    public class OrderHeaderDTO
+    {
         public int Id { get; set; }
 
         [Required]
@@ -43,8 +43,10 @@ namespace Tangy_Models
         [Required]
         [Display(Name = "Postal Code")]
         public string PostalCode { get; set; }
-
+        [Display(Name = "Email")]
+        [Required]
+        public string Email { get; set; }
     }
 }
-}
+
 
