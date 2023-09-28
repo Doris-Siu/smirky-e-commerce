@@ -33,7 +33,7 @@ namespace TangyWeb_Client.Service
             }
         }
 
-        public async Task<IEnumerable<OrderDTO>> GetAll()
+        public async Task<IEnumerable<OrderDTO>> GetAll(string? userId = null)
         {
             var response = await _httpClient.GetAsync("/api/order");
             if (response.IsSuccessStatusCode)
