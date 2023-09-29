@@ -3,6 +3,8 @@
 @inject IJSRuntime _jsRuntime
 @inject IFileUpload _fileUpload
 
+@attribute [Authorize]
+
 <_DeleteConfirmation IsParentCompProcessing="IsLoading" OnConfirmationChanged="ConfirmDelete_Click"></_DeleteConfirmation>
 <div class="row mt-4">
     <div class="col-6">

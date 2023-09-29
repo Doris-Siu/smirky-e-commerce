@@ -2,6 +2,7 @@
 
 @inject ICategoryRepository _categoryRepository
 @inject IJSRuntime _jsRuntime
+@attribute [Authorize]
 
 <_DeleteConfirmation IsParentCompProcessing="IsLoading" OnConfirmationChanged="ConfirmDelete_Click"></_DeleteConfirmation>
 
