@@ -25,9 +25,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDataBase"))
 ); //not sure how to add
 
-builder.Services.AddDefaultIdentity<IdentityUser>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
 
+// config Identity to work with Roles
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddDefaultUI()
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 
