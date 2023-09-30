@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Tangy_Common;
 using Tangy_DataAccess;
 using Tangy_Models;
@@ -113,6 +116,37 @@ namespace TangyWeb_API.Controllers
             }
 
             return StatusCode(201);
+        }
+
+
+
+        // helper methods to get SigningCredentials + Claims -> generate a token upon user sign in
+
+        private SigningCredentials GetSigningCredentials()
+        {
+            var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_aPISettings.SecretKey));
+
+            return new SigningCredentials(secret, SecurityAlgorithms.Sha256);
+        }
+
+        private async Task<List<Claim>> GetClaims(ApplicationUser user)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name,user.Email),
+                new Claim(ClaimTypes.Email,user.Email),
+                new Claim("Id",user.Id)
+            };
+
+
+            // need manually create the Role claim
+            var roles = await _userManager.GetRolesAsync(await _userManager.FindByEmailAsync(user.Email));
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            return claims;
         }
     }
 }
