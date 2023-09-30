@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Tangy_Common;
+using Tangy_DataAccess;
+using Tangy_Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,9 +29,45 @@ namespace TangyWeb_API.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager;
         }
-        public IActionResult Index()
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp([FromBody] SignUpRequestDTO signUpRequestDTO)
         {
-            return View();
+            if (signUpRequestDTO == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var user = new ApplicationUser
+            {
+                UserName = signUpRequestDTO.Email,
+                Email = signUpRequestDTO.Email,
+                Name = signUpRequestDTO.Name,
+                PhoneNumber = signUpRequestDTO.PhoneNumber,
+                EmailConfirmed = true
+            };
+
+            var result = await _userManager.CreateAsync(user, signUpRequestDTO.Password);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new SignUpResponseDTO()
+                {
+                    IsRegisterationSuccessful = false,
+                    Errors = result.Errors.Select(u => u.Description)
+                });
+            }
+
+            var roleResult = await _userManager.AddToRoleAsync(user, SD.Role_Customer);
+            if (!roleResult.Succeeded)
+            {
+                return BadRequest(new SignUpResponseDTO()
+                {
+                    IsRegisterationSuccessful = false,
+                    Errors = result.Errors.Select(u => u.Description)
+                });
+            }
+            return StatusCode(201);
         }
     }
 }

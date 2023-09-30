@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Tangy_Models
 {
-    ppublic class SignUpRequestDTO
+    public class SignUpRequestDTO
     {
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
