@@ -12,6 +12,7 @@
     <PackageReference Include="Blazor.Bootstrap" Version="1.10.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>
