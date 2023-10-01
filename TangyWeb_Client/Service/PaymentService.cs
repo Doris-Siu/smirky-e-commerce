@@ -23,7 +23,7 @@ namespace TangyWeb_Client.Service
             {
                 var content = JsonConvert.SerializeObject(model);
                 var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync("api/stripepayment", bodyContent);
+                var response = await _httpClient.PostAsync("api/stripepayment/create", bodyContent);
                 string responseResult = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
                 {
