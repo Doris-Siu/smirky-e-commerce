@@ -29,5 +29,25 @@ namespace TangyWeb_Client.Service
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
             return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
         }
+
+
+        // replace force reload upon redirection
+        public void NotifyUserLoggedIn(string token)
+        {
+            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType"));
+            var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
+            NotifyAuthenticationStateChanged(authState);
+        }
+
+        private void NotifyAuthenticationStateChanged(Task<AuthenticationState> authState)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void NotifyUserLogout()
+        {
+            var authState = Task.FromResult(new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())));
+            NotifyAuthenticationStateChanged(authState);
+        }
     }
 }

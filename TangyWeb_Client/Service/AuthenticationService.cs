@@ -7,6 +7,8 @@ using System.Text;
 using Tangy_Common;
 using Tangy_Models;
 using TangyWeb_Client.Service.IService;
+using System.Security.Claims;
+using TangyWeb_Client.Helper;
 
 namespace TangyWeb_Client.Service
 {
@@ -35,6 +37,7 @@ namespace TangyWeb_Client.Service
             {
                 await _localStorage.SetItemAsync(SD.Local_Token, result.Token);
                 await _localStorage.SetItemAsync(SD.Local_UserDetails, result.UserDTO);
+                ((AuthStateProvider)_authStateProvider).NotifyUserLoggedIn(result.Token);
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", result.Token);
                 return new SignInResponseDTO() { IsAuthSuccessful = true };
             }
@@ -48,6 +51,7 @@ namespace TangyWeb_Client.Service
         {
             await _localStorage.RemoveItemAsync(SD.Local_Token);
             await _localStorage.RemoveItemAsync(SD.Local_UserDetails);
+            ((AuthStateProvider)_authStateProvider).NotifyUserLogout();
             _client.DefaultRequestHeaders.Authorization = null;
         }
 
@@ -68,6 +72,8 @@ namespace TangyWeb_Client.Service
                 return new SignUpResponseDTO { IsRegisterationSuccessful = false, Errors = result.Errors };
             }
         }
+
+        
     }
 }
 
