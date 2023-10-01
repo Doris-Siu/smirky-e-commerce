@@ -3,11 +3,10 @@
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <Authorizing>
-                    <p>Please wait, we are authorizring the user!</p>
+                    <p>Please wait, we are authorizing the user!</p>
                 </Authorizing>
                 <NotAuthorized>
-                    <p>Not authorized!</p>
-                </NotAuthorized>
+<TangyWeb_Client.Pages.Authentication.RedirectToLogin></TangyWeb_Client.Pages.Authentication.RedirectToLogin>                </NotAuthorized>
             </AuthorizeRouteView>
             <FocusOnNavigate RouteData="@routeData" Selector="h1" />
         </Found>

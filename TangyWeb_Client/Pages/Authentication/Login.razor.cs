@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using Microsoft.AspNetCore.Components;
 using Tangy_Models;
 using TangyWeb_Client.Service.IService;
@@ -17,6 +18,8 @@ namespace TangyWeb_Client.Pages.Authentication
         [Inject]
         public NavigationManager _navigationManager { get; set; }
 
+        public string ReturnUrl { get; set; }
+
         private async Task LoginUser()
         {
             ShowSignInErrors = false;
@@ -25,7 +28,17 @@ namespace TangyWeb_Client.Pages.Authentication
             if (result.IsAuthSuccessful)
             {
                 //sign in is successful
-                _navigationManager.NavigateTo("/", forceLoad: true);
+                var absoluteUri = new Uri(_navigationManager.Uri);
+                var queryParam = HttpUtility.ParseQueryString(absoluteUri.Query);
+                ReturnUrl = queryParam["returnUrl"];
+                if (string.IsNullOrEmpty(ReturnUrl))
+                {
+                    _navigationManager.NavigateTo("/");
+                }
+                else
+                {
+                    _navigationManager.NavigateTo("/" + ReturnUrl);
+                }
             }
             else
             {
