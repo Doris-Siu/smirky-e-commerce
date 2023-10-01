@@ -138,7 +138,7 @@ else
                 Product = product
             };
             Order.OrderDetails.Add(orderDetailDTO);
-            Order.OrderHeader.OrderTotal += (cart.Count * productPrice.Price);
+            Order.OrderHeader.OrderTotal += (item.Count * productPrice.Price);
         }
 
         if (await _localStorage.GetItemAsync<UserDTO>(SD.Local_UserDetails) != null)
