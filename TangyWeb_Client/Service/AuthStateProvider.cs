@@ -39,10 +39,7 @@ namespace TangyWeb_Client.Service
             NotifyAuthenticationStateChanged(authState);
         }
 
-        private void NotifyAuthenticationStateChanged(Task<AuthenticationState> authState)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public void NotifyUserLogout()
         {

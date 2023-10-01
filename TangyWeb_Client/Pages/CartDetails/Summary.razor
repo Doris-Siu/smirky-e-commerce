@@ -3,6 +3,8 @@
 @inject ILocalStorageService _localStorage
 @inject IProductService _productService
 
+@using Microsoft.AspNetCore.Authorization
+
 @attribute [Authorize]
 
 @if (IsProcessing)
