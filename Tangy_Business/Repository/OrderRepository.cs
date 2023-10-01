@@ -25,7 +25,15 @@ namespace Tangy_Business.Repository
         {
             try
             {
+                
                 var obj = _mapper.Map<OrderDTO, Order>(objDTO);
+
+                //var utcOrderDT = DateTime.SpecifyKind(obj.OrderHeader.OrderDate, DateTimeKind.Utc);
+                //var utcShippingDT = DateTime.SpecifyKind(obj.OrderHeader.ShippingDate, DateTimeKind.Utc);
+
+                //obj.OrderHeader.OrderDate = utcOrderDT;
+                //obj.OrderHeader.ShippingDate = utcShippingDT;
+
                 _db.OrderHeaders.Add(obj.OrderHeader);
                 await _db.SaveChangesAsync();
 
