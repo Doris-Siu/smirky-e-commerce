@@ -4,6 +4,8 @@
 @inject IProductService _productService
 @inject IOrderService _orderService
 
+@inject IPaymentService _paymentService
+
 @using Microsoft.AspNetCore.Authorization
 
 @attribute [Authorize]
@@ -165,7 +167,13 @@ else
                 Order = Order
             };
 
-            var orderHeaderSaved = await _orderService.Create(paymentDto);
+            var result = await _paymentService.Checkout(paymentDto);
+
+            Order.OrderHeader.SessionId = result.Data.ToString();
+
+            var orderDTOSaved = await _orderService.Create(paymentDto);
+
+            await _jsRuntime.InvokeVoidAsync("redirectToCheckout", result.Data.ToString());
         }
         catch (Exception ex)
         {

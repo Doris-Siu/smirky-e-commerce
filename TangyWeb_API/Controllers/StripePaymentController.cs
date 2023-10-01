@@ -50,7 +50,7 @@ namespace TangyWeb_API.Controllers
                         PriceData = new SessionLineItemPriceDataOptions
                         {
                             UnitAmount = (long)(item.Price * 100), //20.00 -> 2000
-                            Currency = "usd",
+                            Currency = "gbp",
                             ProductData = new SessionLineItemPriceDataProductDataOptions
                             {
                                 Name = item.Product.Name
