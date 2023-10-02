@@ -14,6 +14,7 @@
     <None Remove="Pages\Product\" />
     <None Remove="Service\" />
     <None Remove="Service\IService\" />
+    <None Remove="Pages\Order\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\LearnBlazor\" />
@@ -25,6 +26,7 @@
     <Folder Include="Service\" />
     <Folder Include="Service\IService\" />
     <Folder Include="wwwroot\images\product\" />
+    <Folder Include="Pages\Order\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tangy_Models\Tangy_Models.csproj">
