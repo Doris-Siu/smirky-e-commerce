@@ -25,7 +25,7 @@ namespace Tangy_Business.Repository
         {
             try
             {
-                
+
                 var obj = _mapper.Map<OrderDTO, Order>(objDTO);
 
                 //var utcOrderDT = DateTime.SpecifyKind(obj.OrderHeader.OrderDate, DateTimeKind.Utc);
@@ -129,10 +129,19 @@ namespace Tangy_Business.Repository
         {
             if (objDTO != null)
             {
-                var OrderHeader = _mapper.Map<OrderHeaderDTO, OrderHeader>(objDTO);
-                _db.OrderHeaders.Update(OrderHeader);
+                var orderHeaderFromDb = _db.OrderHeaders.FirstOrDefault(u => u.Id == objDTO.Id);
+                orderHeaderFromDb.Name = objDTO.Name;
+                orderHeaderFromDb.PhoneNumber = objDTO.PhoneNumber;
+                orderHeaderFromDb.Carrier = objDTO.Carrier;
+                orderHeaderFromDb.Tracking = objDTO.Tracking;
+                orderHeaderFromDb.StreetAddress = objDTO.StreetAddress;
+                orderHeaderFromDb.City = objDTO.City;
+                orderHeaderFromDb.State = objDTO.State;
+                orderHeaderFromDb.PostalCode = objDTO.PostalCode;
+                orderHeaderFromDb.Status = objDTO.Status;
+
                 await _db.SaveChangesAsync();
-                return _mapper.Map<OrderHeader, OrderHeaderDTO>(OrderHeader);
+                return _mapper.Map<OrderHeader, OrderHeaderDTO>(orderHeaderFromDb);
             }
             return new OrderHeaderDTO();
         }

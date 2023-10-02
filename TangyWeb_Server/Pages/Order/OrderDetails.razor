@@ -202,6 +202,8 @@ else
 
     private async Task UpdateOrder()
     {
+        var OrderHeaderDTO = await _orderRepository.UpdateHeader(Order.OrderHeader);
+        Order.OrderHeader = OrderHeaderDTO;
         _jsRuntime.ToastrSuccess("Order has been updated successfully");
     }
 }
