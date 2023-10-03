@@ -2,6 +2,7 @@
 @inject IOrderRepository _orderRepository
 @inject IJSRuntime _jsRuntime
 @using Tangy_Common
+@attribute [Authorize]
 
 @if (IsLoading)
 {
@@ -164,7 +165,7 @@ else
                             }
 
                             @if (Order.OrderHeader.Status == SD.Status_Confirmed ||
-               Order.OrderHeader.Status == SD.Status_Pending)
+              Order.OrderHeader.Status == SD.Status_Pending)
                             {
                                 <button @onclick="CancelOrder" class="btn btn-danger form-control my-1">Cancel Order</button>
                             }
