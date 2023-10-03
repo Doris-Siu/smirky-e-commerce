@@ -8,6 +8,7 @@ using TangyWeb_Server.Service;
 using TangyWeb_Server.Service.IService;
 using Syncfusion.Blazor;
 using Microsoft.AspNetCore.Identity;
+using Stripe;
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1NpRHxbf1xzZFRMYF9bQX5PIiBoS35RdUVqW3tfc3RWQ2hcUUF0\n");
 
@@ -42,6 +43,8 @@ builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
+
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["ApiKey"];
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
