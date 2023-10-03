@@ -160,11 +160,11 @@ else
 
                             @if (Order.OrderHeader.Status == SD.Status_Confirmed)
                             {
-                                <button class="btn btn-success form-control my-1">Ship Order</button>
+                                <button @onclick="ShipOrder" class="btn btn-success form-control my-1">Ship Order</button>
                             }
 
                             @if (Order.OrderHeader.Status == SD.Status_Confirmed ||
-                 Order.OrderHeader.Status == SD.Status_Pending)
+                Order.OrderHeader.Status == SD.Status_Pending)
                             {
                                 <button class="btn btn-danger form-control my-1">Cancel Order</button>
                             }
@@ -205,6 +205,20 @@ else
         var OrderHeaderDTO = await _orderRepository.UpdateHeader(Order.OrderHeader);
         Order.OrderHeader = OrderHeaderDTO;
         _jsRuntime.ToastrSuccess("Order has been updated successfully");
+    }
+
+    private async Task ShipOrder()
+    {
+        if (string.IsNullOrEmpty(Order.OrderHeader.Carrier) || string.IsNullOrEmpty(Order.OrderHeader.Tracking))
+        {
+            _jsRuntime.ToastrError("Please Enter Tracking and Carrier Information");
+            return;
+        }
+
+        Order.OrderHeader.Status = SD.Status_Shipped;
+        var OrderHeaderDTO = await _orderRepository.UpdateHeader(Order.OrderHeader);
+        Order.OrderHeader = OrderHeaderDTO;
+        _jsRuntime.ToastrSuccess("Order has been Shipped!");
     }
 }
 
