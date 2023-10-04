@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 using Tangy_Business.Repository.IRepository;
@@ -15,9 +16,12 @@ namespace TangyWeb_API.Controllers
     public class OrderController : Controller
     {
         private readonly IOrderRepository _orderRepository;
-        public OrderController(IOrderRepository orderRepository)
+        private readonly IEmailSender _emailSender;
+
+        public OrderController(IOrderRepository orderRepository, IEmailSender emailSender)
         {
             _orderRepository = orderRepository;
+            _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -66,22 +70,34 @@ namespace TangyWeb_API.Controllers
         [ActionName("paymentsuccessful")]
         public async Task<IActionResult> PaymentSuccessful([FromBody] OrderHeaderDTO orderHeaderDTO)
         {
-            var service = new SessionService();
-            var sessionDetails = service.Get(orderHeaderDTO.SessionId);
-            if (sessionDetails.PaymentStatus == "paid")
+            try
             {
-                var result = await _orderRepository.MarkPaymentSuccessful(orderHeaderDTO.Id);
-                if (result == null)
+                var service = new SessionService();
+                var sessionDetails = service.Get(orderHeaderDTO.SessionId);
+                if (sessionDetails.PaymentStatus == "paid")
                 {
-                    return BadRequest(new ErrorModelDTO()
-                    {
-                        ErrorMessage = "Can not mark payment as successful"
-                    });
-                }
-                return Ok(result);
-            }
+                    var result = await _orderRepository.MarkPaymentSuccessful(orderHeaderDTO.Id);
 
+                    await _emailSender.SendEmailAsync(orderHeaderDTO.Email, "SMirkY Order Confirmation",
+                        "New Order has been created :" + orderHeaderDTO.Id);
+
+
+                    if (result == null)
+                    {
+                        return BadRequest(new ErrorModelDTO()
+                        {
+                            ErrorMessage = "Can not mark payment as successful"
+                        });
+                    }
+                    return Ok(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                var a = ex.Message;
+            }
             return BadRequest();
+
         }
     }
 }

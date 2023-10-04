@@ -10,6 +10,7 @@ using Tangy_DataAccess.Data;
 using TangyWeb_API.Helper;
 using Microsoft.OpenApi.Models;
 using Stripe;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -90,6 +91,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddCors(o => o.AddPolicy("Tangy", builder =>
 {

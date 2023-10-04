@@ -1,5 +1,4 @@
 ﻿@page "/login"
-
 <EditForm Model="SignInRequest" OnValidSubmit="LoginUser">
     <DataAnnotationsValidator />
     <div class="py-4">
@@ -18,12 +17,13 @@
 
 
                         <div class="py-2">
-                            <InputText @bind-Value="SignInRequest.UserName" id="email" placeholder="Email..." class="form-control mb-2" />
-                            <ValidationMessage For="(()=>SignInRequest.UserName)"></ValidationMessage>
+                                <InputText @bind-Value="SignInRequest.UserName" id="email" placeholder="Email..." class="form-control mb-2" />
+                                <ValidationMessage For="(() => SignInRequest.UserName)"></ValidationMessage>
+                            
                         </div>
                         <div class="py-2">
                             <InputText @bind-Value="SignInRequest.Password" type="password" placeholder="Password..." id="password" class="form-control mb-2" />
-                            <ValidationMessage For="(()=>SignInRequest.Password)"></ValidationMessage>
+                            <ValidationMessage For="(() => SignInRequest.Password)"></ValidationMessage>
                         </div>
                         <div class="py-2">
                             <button type="submit" class="btn btn-success btn-block"><i class="bi bi-person-bounding-box"></i> Sign in</button>
@@ -35,3 +35,15 @@
         </div>
     </div>
 </EditForm>
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+
+#if DEBUG
+        SignInRequest.UserName = "customer@gmail.com";
+        SignInRequest.Password = "stringS1234!";
+#else
+        
+#endif
+    }
+}
