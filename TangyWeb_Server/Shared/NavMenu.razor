@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">TangyWeb_Server</a>
+        <a class="navbar-brand" href="">SMirkY Admin Portal</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,17 +12,17 @@
         <AuthorizeView Roles="@roleAdmin">
             <div class="nav-item px-3">
                 <a class="nav-link" href="/category">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span>Category
+                    <span class="oi oi-file" aria-hidden="true"></span>Category
                 </a>
             </div>
             <div class="nav-item px-3">
                 <a class="nav-link" href="/product">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span>Product
+                    <span class="oi oi-cart" aria-hidden="true"></span>Product
                 </a>
             </div>
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="/orderlist">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Orders
+                    <span class="oi oi-credit-card" aria-hidden="true"></span> Orders
                 </NavLink>
             </div>
         </AuthorizeView>
