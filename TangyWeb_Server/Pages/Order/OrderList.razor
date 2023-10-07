@@ -4,7 +4,9 @@
 @attribute [Authorize]
 
 <div>
-    <h4 class="card-title text-info">Order's List</h4>
+    <div>
+        <h4 class="card-title text-primary">Order List</h4>
+    </div> 
     @if (OrderHeaders.Any())
     {
         <RadzenDataGrid AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" PageSize="5" AllowPaging="true" AllowSorting="true"
@@ -20,7 +22,7 @@
 
                 <RadzenDataGridColumn TItem="OrderHeaderDTO" Title="Details">
                     <Template Context="data">
-                        <RadzenButton Click="(args=> OrderDetails(data.Id))" Text="Details" ButtonStyle="ButtonStyle.Success"></RadzenButton>
+                        <RadzenButton Click="(args=> OrderDetails(data.Id))" Text="Detail" ButtonStyle="ButtonStyle.Info"></RadzenButton>
                     </Template>
                 </RadzenDataGridColumn>
             </Columns>

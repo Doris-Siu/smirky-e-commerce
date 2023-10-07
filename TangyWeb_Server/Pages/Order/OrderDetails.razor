@@ -17,10 +17,10 @@ else
             <div class="card-header bg-dark text-light ml-0">
                 <div class="container row">
                     <div class="col-12 d-none d-md-block col-md-6 pb-1">
-                        <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
+                        <span class="oi oi-cart"></span> &nbsp; <b>Order Summary</b>
                     </div>
                     <div class="col-12 col-md-4 offset-md-2 text-right">
-                        <a href="/orderList" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
+                        <a href="/orderList" class="btn btn-outline-info form-control btn-sm">Back to Order List</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@ else
                             <EditForm Model="Order" OnValidSubmit="UpdateOrder">
                                 <DataAnnotationsValidator />                                <div class="row">
                                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="text-primary">Customer Details:</span>
+                                        <span class="text-primary">Customer Detail</span>
                                     </h4>
                                 </div>
                                 <div class="row my-1">
@@ -123,7 +123,7 @@ else
                                 </div>
                                 @if (Order.OrderHeader.Status == SD.Status_Confirmed)
                                 {
-                                    <input type="submit" class="btn btn-warning form-control my-1" value="Update Order Details" />
+                                    <input type="submit" class="btn btn-info form-control my-1 text-white" value="Update Customer Detail" />
                                 }
                             </EditForm>
                         </div>
@@ -138,22 +138,22 @@ else
                                         <div class="row container">
                                             <div class="col-8">
                                                 <h6 class="my-0 text-primary">@detail.ProductName</h6>
-                                                <small class="text-muted">Price : @detail.Price.ToString("c")</small><br />
+                                                <small class="text-muted">Price : @detail.Price.ToString("C", new CultureInfo("en-GB"))</small><br />
                                                 <small class="text-muted">Quantity : @detail.Count</small>
                                             </div>
                                             <div class="col-4 text-end">
-                                                <p class="text-success">@((detail.Count * detail.Price).ToString("c"))</p>
+                                                <p class="text-black">@((detail.Count * detail.Price).ToString("C", new CultureInfo("en-GB")))</p>
                                             </div>
                                         </div>
                                     </li>
                                 }
-                                <li class="list-group-item bg-info">
+                                <li class="list-group-item bg-warning">
                                     <div class="row container">
                                         <div class="col-6">
-                                            <h5 class="text-white">TOTAL </h5>
+                                            <h5 class="text-black">TOTAL </h5>
                                         </div>
                                         <div class="col-6 text-end">
-                                            <h5 class="text-white">@Order.OrderHeader.OrderTotal.ToString("c")</h5>
+                                            <h5 class="text-black">@Order.OrderHeader.OrderTotal.ToString("C", new CultureInfo("en-GB"))</h5>
                                         </div>
                                     </div>
                                 </li>
@@ -205,14 +205,14 @@ else
     {
         var OrderHeaderDTO = await _orderRepository.UpdateHeader(Order.OrderHeader);
         Order.OrderHeader = OrderHeaderDTO;
-        _jsRuntime.ToastrSuccess("Order has been updated successfully");
+        _jsRuntime.ToastrSuccess("Customer has been updated successfully!");
     }
 
     private async Task ShipOrder()
     {
         if (string.IsNullOrEmpty(Order.OrderHeader.Carrier) || string.IsNullOrEmpty(Order.OrderHeader.Tracking))
         {
-            _jsRuntime.ToastrError("Please Enter Tracking and Carrier Information");
+            _jsRuntime.ToastrError("Please Enter Tracking and Carrier Information.");
             return;
         }
 
@@ -227,11 +227,11 @@ else
         Order.OrderHeader = await _orderRepository.CancelOrder(Order.OrderHeader.Id);
         if (Order.OrderHeader.Status == SD.Status_Cancelled)
         {
-            _jsRuntime.ToastrSuccess("Order has been cancelled successfully");
+            _jsRuntime.ToastrSuccess("Order has been cancelled successfully!");
         }
         if (Order.OrderHeader.Status == SD.Status_Refunded)
         {
-            _jsRuntime.ToastrSuccess("Order has been cancelled & refunded successfully");
+            _jsRuntime.ToastrSuccess("Order has been cancelled & refunded successfully!");
         }
 
     }
