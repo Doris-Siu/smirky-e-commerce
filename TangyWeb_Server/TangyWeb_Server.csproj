@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Pages\LearnBlazor\" />
-    <None Remove="Pages\LearnBlazor\LearnBlazorComponents\" />
     <None Remove="Helper\" />
     <None Remove="Pages\Category\" />
     <None Remove="Pages\Product\" />
@@ -17,8 +15,6 @@
     <None Remove="Pages\Order\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\LearnBlazor\" />
-    <Folder Include="Pages\LearnBlazor\LearnBlazorComponents\" />
     <Folder Include="wwwroot\js\" />
     <Folder Include="Helper\" />
     <Folder Include="Pages\Category\" />
