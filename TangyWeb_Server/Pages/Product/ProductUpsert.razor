@@ -11,7 +11,9 @@
 @attribute [Authorize]
 
 <div class="row my-2">
-    <h3 class="card-title text-primary mb-3 ml-3">@Title Product</h3>
+    <div>
+        <h3 class="card-title text-primary mb-3 ml-3">@Title Product</h3>
+    </div>
 
     <div class="col-md-10">
         @if (IsLoading)

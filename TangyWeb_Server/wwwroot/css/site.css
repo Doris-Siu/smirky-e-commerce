@@ -63,3 +63,7 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
+.authenticated-bg {
+    background-size: cover;
+    background-repeat: no-repeat;
+}

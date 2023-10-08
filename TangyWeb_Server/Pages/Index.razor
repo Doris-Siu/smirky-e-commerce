@@ -2,17 +2,30 @@
 
 <PageTitle>SMirKy Admin Portal</PageTitle>
 
-<div class="bg-image"
-     style="background-image: url('https://img.freepik.com/free-vector/cloud-computing-security-abstract-concept-illustration_335657-2105.jpg?w=1060&t=st=1696710312~exp=1696710912~hmac=f2ceddeac16b4691ff97405da0d896154ecf712403469f129d62f9284a3d4e9a'); height: 100vh">
-    <h3 class="text-danger"><span class="oi oi-lock-locked"></span> SECURE INFORMATION</h3>
-    <p class="mt-2">
-        Welcome!
-        Only people authorized as <span class="text-danger font-weight-bold">ADMIN</span> can access the portal. <br />
-        To continue, please <a href="Identity/Account/Login">LOGIN</a> to authenticate your identity.
-    </p>
-    
-    <span class="alert alert-secondary p-2"><b>Need help?</b> Please email <span class="text-primary">smirkyuk@gmail.com</span> for any issue.</span>
 
+<AuthorizeView>
+    <Authorized>
+        <div class="bg-image authenticated-bg"
+             style="background-image: url('https://img.freepik.com/free-photo/computer-security-with-login-password-padlock_107791-16191.jpg?size=626&ext=jpg&ga=GA1.1.1658853987.1696709623&semt=ais'); height: 100vh ">
+            <h3 class="text-success"><span class="oi oi-lock-unlocked"></span> Welcome back Admin.</h3>
+            <p class="mt-2">
+                Let's get started!
+            </p>
 
-</div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="bg-image"
+             style="background-image: url('https://img.freepik.com/free-vector/cloud-computing-security-abstract-concept-illustration_335657-2105.jpg?w=1060&t=st=1696710312~exp=1696710912~hmac=f2ceddeac16b4691ff97405da0d896154ecf712403469f129d62f9284a3d4e9a'); height: 100vh">
+            <h3 class="text-danger"><span class="oi oi-lock-locked"></span> SECURE INFORMATION</h3>
+            <p class="mt-2">
+                Welcome!
+                Only people authorized as <span class="text-danger font-weight-bold">ADMIN</span> can access the portal. <br />
+                To continue, please <a href="Identity/Account/Login">LOGIN</a> to authenticate your identity.
+            </p>
 
+            <span class="alert alert-secondary p-2"><b>Need help?</b> Please email <span class="text-primary">smirkyuk@gmail.com</span> for any issue.</span>
+
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
