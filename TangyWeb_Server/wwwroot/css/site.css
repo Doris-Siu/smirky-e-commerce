@@ -67,3 +67,7 @@ a, .btn-link {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.custom-purple {
+    background-color: rgba(157,78,197,255);
+}
