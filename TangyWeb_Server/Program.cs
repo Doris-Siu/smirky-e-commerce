@@ -5,7 +5,7 @@ using Tangy_Business.Repository.IRepository;
 using Tangy_DataAccess.Data;
 using TangyWeb_Server.Service;
 using TangyWeb_Server.Service.IService;
-using Syncfusion.Blazor;
+//using Syncfusion.Blazor;
 using Microsoft.AspNetCore.Identity;
 using Stripe;
 
@@ -17,7 +17,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSyncfusionBlazor();
+//builder.Services.AddSyncfusionBlazor();
 
 // DB
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

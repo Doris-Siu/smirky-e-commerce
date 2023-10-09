@@ -21,12 +21,20 @@ namespace Tangy_Business.Repository
 
         public async Task<ProductPriceDTO> Create(ProductPriceDTO objDTO)
         {
-            var obj = _mapper.Map<ProductPriceDTO, ProductPrice>(objDTO);
+            try
+            {
+                var obj = _mapper.Map<ProductPriceDTO, ProductPrice>(objDTO);
 
-            var addedObj = _db.ProductPrices.Add(obj);
-            await _db.SaveChangesAsync();
+                var addedObj = _db.ProductPrices.Add(obj);
+                await _db.SaveChangesAsync();
 
-            return _mapper.Map<ProductPrice, ProductPriceDTO>(addedObj.Entity);
+                return _mapper.Map<ProductPrice, ProductPriceDTO>(addedObj.Entity);
+            }
+            catch(Exception ex)
+            {
+                var a = ex.Message;
+            }
+            return new ProductPriceDTO();
         }
 
         public async Task<int> Delete(int id)
