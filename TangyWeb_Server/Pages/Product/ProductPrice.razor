@@ -6,7 +6,7 @@
 @attribute [Authorize]
 
 
-<h3 class="card-title text-primary mb-3 ml-3">Product Price Managment</h3>
+<h3 class="card-title text-primary mb-3">Product Price Managment</h3>
 @if (IsLoading)
 {
     <div class="text-center">
@@ -18,9 +18,10 @@ else
     <div class="row border p-2 mb-4">
         <div class="col-11">
             <div class="card-body">
-                <h4>@Product.Name</h4>
-                <span>Category : @Product.Category.Name</span> <br />
-                Description : <span>@((MarkupString)Product.Description)</span>
+                <h4 class="text-danger">@Product.Name</h4>
+                <span><b>Category:</b> @Product.Category.Name</span> <br />
+                <br />
+                <b>Description:</b> <span>@((MarkupString)Product.Description)</span>
             </div>
         </div>
         <div class="col-1">
@@ -30,7 +31,7 @@ else
 
     <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="add_circle_outline" class="mt-2 mb-4" Text="Add New Order" Click="@InsertRow" Disabled=@(priceToInsert != null || priceToUpdate != null) />
 
-    <RadzenDataGrid @ref="productPriceGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" PageSize="5" AllowPaging="true" AllowSorting="true" EditMode="DataGridEditMode.Single"
+    <RadzenDataGrid @ref="productPriceGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" PageSize="3" AllowPaging="true" AllowSorting="true" EditMode="DataGridEditMode.Single"
                     Data="ProductPrices" TItem="ProductPriceDTO" LogicalFilterOperator="LogicalFilterOperator.Or" RowUpdate="@OnUpdateRow" RowCreate="@OnCreateRow" Sort="@Reset" Page="@Reset" Filter="@Reset">
         <Columns>
             <RadzenDataGridColumn TItem="ProductPriceDTO" Property="Id" Filterable="false" Title="ID" />

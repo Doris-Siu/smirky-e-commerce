@@ -30,7 +30,7 @@ namespace Tangy_Business.Repository
 
                 return _mapper.Map<ProductPrice, ProductPriceDTO>(addedObj.Entity);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 var a = ex.Message;
             }

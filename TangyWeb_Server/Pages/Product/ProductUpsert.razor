@@ -26,7 +26,7 @@
         {
             <EditForm Model="Product" OnValidSubmit="UpsertProduct">
                 <DataAnnotationsValidator />
-                @*<ValidationSummary/>*@
+                <ValidationSummary/>
                 <div class="form-group">
                     <label>Name</label>
                     <InputText @bind-Value="Product.Name" class="form-control"></InputText>
@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label>Description</label>
-                    @*<SfRichTextEditor @bind-Value="Product.Description"></SfRichTextEditor>*@
+                    <InputText @bind-Value="Product.Description" class="form-control"></InputText>
                     <ValidationMessage For="() => Product.Description"></ValidationMessage>
                 </div>
 
