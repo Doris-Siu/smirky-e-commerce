@@ -18,27 +18,27 @@ else
             <div class="card-header ml-0  row">
                 <div class="col-12 col-md-6">
 
-                    <h1 class="text-primary">@Product.Name</h1>
+                    <h1 class="custom-font">@Product.Name</h1>
                 </div>
                 <div class="col-12 col-md-6 text-end pt-4">
-                    <span class="badge bg-info pt-2" style="height:30px;">@Product.Category.Name</span>
-                    <span class="badge bg-warning pt-2" style="height:30px;">@Product.Color</span>
+                    <span class="badge custom-tag pt-2" style="height:30px;">@Product.Category.Name</span>
+                    <span class="badge custom-tag pt-2" style="height:30px;">@Product.Color</span>
                 </div>
             </div>
             <div class="card-body">
                 <div class="container rounded p-2">
                     <div class="row">
                         <div class="col-10">
-                            <p>@((MarkupString)Product.Description)</p>
+                            <p class="text-muted">@((MarkupString)Product.Description)</p>
                             <div class="row">
                                 @foreach (var productPrice in Product.ProductPrices)
                                 {
                                     if (productPrice.Id == DetailsVM.SelectedProductPriceId)
                                     {
                                         //this product is selected by user
-                                        <div class="col-2 bg-light text-center pt-2 m-2" style="border:3px solid #28A745; border-radius:10px;box-shadow:5px">
+                                        <div class="col-2 bg-light text-center pt-2 m-2" style="border: 3px solid rgb(5, 39, 103); border-radius: 10px; box-shadow: 5px">
                                             <p>@productPrice.Size</p>
-                                            <p>@productPrice.Price.ToString("c")</p>
+                                            <p>@productPrice.Price.ToString("C", new CultureInfo("en-GB"))</p>
                                         </div>
                                     }
                                     else
@@ -47,7 +47,7 @@ else
                                         <div class="col-2 bg-light text-center pt-2 m-2" style="border:1px solid; border-radius:10px;box-shadow:5px"
                                              @onclick="(args)=>SelectedProductPrice(args,productPrice.Id)">
                                             <p>@productPrice.Size</p>
-                                            <p>@productPrice.Price.ToString("c")</p>
+                                            <p>@productPrice.Price.ToString("C", new CultureInfo("en-GB"))</p>
                                         </div>
                                     }
                                 }
@@ -58,7 +58,7 @@ else
                                 else
                                 {
                                     <div class="row pl-2">
-                                        <div class="col-2 text-primary"><h4>Count</h4></div>
+                                        <div class="col-2 purple-text"><h4>Count</h4></div>
                                         <div class="col-10">
                                             <InputNumber @bind-Value="DetailsVM.Count" class="form-control" />
                                             <ValidationMessage For="()=>DetailsVM.Count"></ValidationMessage>
@@ -78,13 +78,13 @@ else
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-12 col-md-6 pb-1">
-                            <a class="btn btn-success form-control " href="/">Back to Home</a>
+                            <a class="custom-btn form-control " href="/">Back to Home</a>
                         </div>
                         <div class="col-12 col-md-6 pb-1">
                             @if (DetailsVM.SelectedProductPriceId > 0)
                             {
                                 //item has been selected
-                                <button type="submit" value="Add to Cart" class="btn btn-primary form-control">Add to Cart</button>
+                                <button type="submit" value="Add to Cart" class="btn btn-primary form-control">Add to Cart<span class="oi oi-cart"></span></button>
                             }
                             else
                             {

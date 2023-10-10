@@ -22,13 +22,13 @@ else
     {
         <div class="container mt-4">
             <div class="card">
-                <div class="card-header bg-dark text-light ml-0 ">
+                <div class="card-header bg-light text-light ml-0 ">
                     <div class="row">
                         <div class="col-6  pt-2">
-                            Shopping Cart
+                            <span class="oi oi-cart text-black"></span>
                         </div>
                         <div class="col-6 col-md-3 offset-md-3 text-end">
-                            <a href="/" class="btn btn-outline-info form-control">Continue Shopping</a>
+                            <a href="/" class="custom-btn form-control">Continue Shopping</a>
                         </div>
                     </div>
                 </div>
@@ -41,13 +41,13 @@ else
                             <div class="col-3 col-md-1 text-center py-2">
                                 <img src="@item.Product.ImageUrl" class="rounded" width="100%" />
                             </div>
-                            <div class="col-9 text-sm-center text-md-start col-md-4 pt-lg-1 ">
+                            <div class="col-9 text-sm-center text-md-start col-md-4 pt-lg-1 text-black">
                                 <h4><strong>@item.Product.Name</strong></h4>
 
-                                <div class="badge bg-primary text-center" style="font-size:12px;">
+                                <div class="badge custom-tag text-center" style="font-size:12px;">
                                     @item.Product.Category.Name
                                 </div>
-                                <div class="badge bg-info text-center" style="font-size:12px;">
+                                <div class="badge custom-tag text-center" style="font-size:12px;">
                                     @item.Product.Color
                                 </div>
                                 <div><p>Size : @item.ProductPrice.Size</p></div>
@@ -55,7 +55,7 @@ else
                             <div class="col-12 text-sm-center col-md-7 text-md-start row  pt-lg-3 mt-3">
                                 <div class="col-4 pt-1 ">
 
-                                    <h6><strong>@item.ProductPrice.Price.ToString("c") <span class="text-muted">x</span> @item.Count </strong></h6>
+                                    <h6><strong>@item.ProductPrice.Price.ToString("C", new CultureInfo("en-GB")) <span class="text-muted">x</span> @item.Count </strong></h6>
                                 </div>
                                 <div class="col-6 col-sm-4 col-lg-6">
                                     <button @onclick="()=>Increment(item.ProductId,item.ProductPriceId,1)" type="submit" class="btn btn-primary">
@@ -81,8 +81,8 @@ else
                         <div class="col-12 col-md-6 offset-md-1 col-lg-4 offset-lg-3 pr-4">
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between bg-light">
-                                    <span class="text-info"> Total (GBP)</span>
-                                    <strong class="text-info">@OrderTotal.ToString("c")</strong>
+                                    <span class="purple-text"> Total (GBP)</span>
+                                    <strong class="purple-text">@OrderTotal.ToString("C", new CultureInfo("en-GB"))</strong>
                                 </li>
                             </ul>
                         </div>
@@ -92,7 +92,7 @@ else
                 </div>
                 <div class="card-footer">
                     <div class="col-12  col-md-3 offset-md-9">
-                        <a href="/summary" class="btn btn-secondary form-control">Summary</a>
+                        <a href="/summary" class="custom-btn form-control">Summary</a>
                     </div>
                 </div>
             </div>
