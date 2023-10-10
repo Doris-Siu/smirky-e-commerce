@@ -63,8 +63,13 @@ a, .btn-link {
         content: "An error has occurred."
     }
 
-.custom-purple {
-    background-color: rgba(157,78,197,255);
+.brand-color {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.custom-font {
+    color: white;
+    -webkit-text-stroke: 1px rgb(5, 39, 103);
 }
 
 .custom-card {
@@ -73,19 +78,18 @@ a, .btn-link {
 }
 
 .purple-text {
-    color: rgb(38, 59, 126);
-    font-weight: 900;
+    color: rgb(5, 39, 103);
 }
 
 .custom-tag {
     background-color: rgb(247, 234, 234);
-    color: rgb(38, 59, 126);
+    color: rgb(5, 39, 103);
 }
 
 
 .custom-btn {
     border: none;
-    background-color: rgb(38, 59, 126);
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
     color: white;
     display: flex;
     align-items: center;
@@ -96,6 +100,6 @@ a, .btn-link {
         background-color: rgb(247, 234, 234);
     }
 
-.brand-color {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
+    .bg-color {
+       background-color:aliceblue;
+    }

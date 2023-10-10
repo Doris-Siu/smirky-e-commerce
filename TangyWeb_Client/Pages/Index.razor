@@ -11,21 +11,21 @@
 else
 {
     <div class="container">
-        <div class="row  pb-3 pt-3 backgroundWhite">
+        <div class="row  pb-3 pt-3">
             @foreach (var category in Products.Select(u => u.Category.Name).Distinct())
             {
-                <h2 class="purple-text pl-1"><b>@category</b></h2>
+                <h2 class="custom-font pl-1"><b>@category</b></h2>
 
                 @foreach (var product in Products.Where(u => u.Category.Name == category))
                 {
                     <div class="col-lg-4 col-md-6 pb-4 filter">
                         <div class="custom-card shadow-sm">
                             <div class="card-body pb-1 row">
-                                <div class="col-8 text-white h5">@product.Name</div>
+                                <div class="col-8 custom-purple h6">@product.Name</div>
                                 <div class="col-4 text-end">
-                                    <span class="purple-text h4">
+                                    <div class="custom-purple h4">
                                         @product.ProductPrices.OrderBy(u => u.Price).FirstOrDefault()?.Price.ToString("C", new CultureInfo("en-GB"))
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -41,7 +41,8 @@ else
                                     <p>@((MarkupString)product.Description)</p>
                                 </div>
                                 <div class="col-12 p-1">
-                                    <a href="/details/@product.Id" class="custom-btn form-control btn-sm p-2" style="height:40px">View Details</a>                                </div>
+                                    <a href="/details/@product.Id" class="custom-btn form-control btn-sm p-2" style="height:40px">View Details</a>
+                                </div>
                             </div>
                         </div>
                     </div>
