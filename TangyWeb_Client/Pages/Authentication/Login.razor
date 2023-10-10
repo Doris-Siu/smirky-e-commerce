@@ -17,17 +17,17 @@
 
 
                         <div class="py-2">
-                                <InputText @bind-Value="SignInRequest.UserName" id="email" placeholder="Email..." class="form-control mb-2" />
-                                <ValidationMessage For="(() => SignInRequest.UserName)"></ValidationMessage>
-                            
+                            <InputText @bind-Value="SignInRequest.UserName" id="email" placeholder="Email..." class="form-control mb-2" />
+                            <ValidationMessage For="(() => SignInRequest.UserName)"></ValidationMessage>
+
                         </div>
                         <div class="py-2">
                             <InputText @bind-Value="SignInRequest.Password" type="password" placeholder="Password..." id="password" class="form-control mb-2" />
                             <ValidationMessage For="(() => SignInRequest.Password)"></ValidationMessage>
                         </div>
-                        <div class="py-2">
+                        <div class="py-2 align-item">
                             <button type="submit" class="custom-btn"><i class="bi bi-person-bounding-box"></i> Sign in</button>
-                            <a href="/registration" class="btn btn-primary text-white m-2"><i class="bi bi-person-plus-fill"></i> Register as a new user</a>
+                            <p>Don't have an account? <a href="/register">Create a SMirkY Account</a></p>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
         SignInRequest.UserName = "customer@gmail.com";
         SignInRequest.Password = "stringS1234!";
 #else
-        
+
 #endif
     }
 }
