@@ -97,9 +97,22 @@ a, .btn-link {
 }
 
     .custom-btn:hover {
+        background-image: none;
         background-color: rgb(247, 234, 234);
     }
 
     .bg-color {
        background-color:aliceblue;
     }
+
+.custom-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    
+}
