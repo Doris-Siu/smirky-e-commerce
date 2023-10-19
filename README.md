@@ -1,7 +1,14 @@
 # E-Commerce website
 This is an e-commerce application using Blazor Web Assembly and Blazor Server, consuming .NET 6 API. All the data involved will be linked and stored in the database. 
 
-On the front-end, customers can browse products, add products to the cart, and pay with Stripe integrated with the website. On the back-end, Authentication is applied where only Admin can access and manage the contents, including product information displayed on the front-end, customer details, and order information.
+On the front-end, customers can browse products, add products to the cart, and pay with Stripe integrated with the website.
+https://github.com/Doris-Siu/smirky-e-commerce/assets/107772913/500d5a93-ca2b-473c-ba62-aa8c26f22c14
+
+On the back-end, Authentication is applied where only Admin can access and manage the contents, including product information displayed on the front-end, customer details, and order information.
+https://github.com/Doris-Siu/smirky-e-commerce/assets/107772913/a7c7cbac-309d-42b9-a94f-4d351dc05b4e
+
+The front-end consumes .NET 6 API to perform CRUD operations.
+<img width="1440" alt="api" src="https://github.com/Doris-Siu/smirky-e-commerce/assets/107772913/ae937740-6d49-4fc4-908f-65d0f9820356">
 
 
 ## Technologies
