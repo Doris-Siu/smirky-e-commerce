@@ -24,6 +24,7 @@ The front-end consumes .NET 6 API to perform CRUD operations.
 - .NET
 - Javascript
 - CSS
+- Bootstrap5
 - Radzen
 - Stripe Payment
 - Postgresql
