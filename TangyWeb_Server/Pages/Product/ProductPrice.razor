@@ -29,7 +29,7 @@ else
         </div>
     </div>
 
-    <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="add_circle_outline" class="mt-2 mb-4" Text="Add New Order" Click="@InsertRow" Disabled=@(priceToInsert != null || priceToUpdate != null) />
+    <RadzenButton ButtonStyle="ButtonStyle.Success" Icon="add_circle_outline" class="mt-2 mb-4" Text="Add New Price" Click="@InsertRow" Disabled=@(priceToInsert != null || priceToUpdate != null) />
 
     <RadzenDataGrid @ref="productPriceGrid" AllowAlternatingRows="false" AllowFiltering="true" AllowColumnResize="true" FilterMode="FilterMode.Advanced" PageSize="3" AllowPaging="true" AllowSorting="true" EditMode="DataGridEditMode.Single"
                     Data="ProductPrices" TItem="ProductPriceDTO" LogicalFilterOperator="LogicalFilterOperator.Or" RowUpdate="@OnUpdateRow" RowCreate="@OnCreateRow" Sort="@Reset" Page="@Reset" Filter="@Reset">
